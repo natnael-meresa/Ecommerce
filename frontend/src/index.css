@@ -25,6 +25,16 @@ h3 {
   margin: 0.1rem;
 }
 
+h1 {
+  font-size: 1.8rem;
+  padding: 1rem 0;
+}
+h2 {
+  font-size: 1.0rem;
+  padding: 0.1rem 0;
+}
+
 .link{
   text-decoration: none;
+  margin-left: 10px;
 }
