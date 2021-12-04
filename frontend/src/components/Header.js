@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/userActions.js";
+import SearchBox  from "./SearchBox.js";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 
 const Header = () => {
@@ -21,9 +22,10 @@ const Header = () => {
             <Navbar.Brand>Ecommerce</Navbar.Brand>
           </Link>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          
           <Navbar.Collapse id="responsive-navbar-nav">
+            <SearchBox />
             <Nav className="me-auto">
-              <Nav.Link>Features</Nav.Link>
               <Nav.Link href="#pricing">Pricing</Nav.Link>
             </Nav>
             <Nav>

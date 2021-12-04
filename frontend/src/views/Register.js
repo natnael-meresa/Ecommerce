@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { register } from "../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
@@ -11,10 +11,7 @@ import Footer from "../components/Footer";
 import {
   Row,
   Col,
-  ListGroup,
-  Card,
   Button,
-  ListGroupItem,
   Form,
   Container,
 } from "react-bootstrap";
@@ -36,7 +33,7 @@ const Register = () => {
     if (userInfo) {
       navigate("/");
     }
-  }, [userInfo]);
+  }, [userInfo, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();

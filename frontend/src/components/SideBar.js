@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import {
-    Button,
     NavDropdown
   } from "react-bootstrap";
 
@@ -40,8 +39,8 @@ const SideBar = () => {
                 </li>
                 <li class="nav-item">
                   <NavDropdown.Item>
-                    <Link to="/admin/userlist" className="link">
-                      Dashboard
+                    <Link to="/dashboard/orderlist" className="link">
+                      Order List
                     </Link>
                   </NavDropdown.Item>
                 </li>

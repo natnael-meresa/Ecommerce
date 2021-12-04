@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { getUserDetails, updateUser } from "../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
@@ -12,7 +12,6 @@ import { USER_UPDATE_RESET } from "../constants/userConstants";
 import {
   Button,
   Form,
-  Container,
 } from "react-bootstrap";
 
 const UserEdit = () => {
@@ -44,7 +43,7 @@ const UserEdit = () => {
             setIsAdmin(user.isAdmin)
         }
       }
-  }, [user, id, dispatch, successUpdate]);
+  }, [user, id, dispatch, successUpdate, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();

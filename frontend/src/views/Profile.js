@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
 import { listMyOrders } from "../actions/orderActions"
 import {useDispatch, useSelector} from 'react-redux'
@@ -11,9 +11,7 @@ import {
   Row,
   Table,
   Col,
-  Navbar,
   Button,
-  Nav,
   Form,
   Container
 } from "react-bootstrap";
@@ -53,7 +51,7 @@ const Profile = () => {
                 setEmail(user.email)
             }
         }
-    }, [dispatch, userInfo, user])
+    }, [dispatch, userInfo, user, navigate])
 
     const submitHandler = (e) => {
         e.preventDefault()

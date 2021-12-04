@@ -1,8 +1,5 @@
 import "./App.css";
-import { Container } from "react-bootstrap";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
 import Home from "./views/Home";
 import Product from "./views/Product";
 import Cart from "./views/Cart";
@@ -17,6 +14,9 @@ import UserList from "./views/UserList.js";
 import Dashboard from "./views/Dashboard.js";
 import UserEdit from "./views/UserEdit";
 import ProductList from './views/ProductList'
+import ProductEdit from './views/ProductEdit'
+import OrderList from './views/OrderList'
+
 function App() {
   return (
     <Router>
@@ -24,6 +24,7 @@ function App() {
       <main className="">
           <Routes>
             <Route path="/" element={<Home/>} exact />
+            <Route path="/search/:keyword" element={<Home/>} exact/>
             <Route path={"product/:id"} element={<Product/>} />
             <Route path={"/cart/:id"} element={<Cart/>} />
             <Route path={"/cart"} element={<Cart/>} />
@@ -37,7 +38,13 @@ function App() {
             <Route path={"/dashboard/userlist"} element={<UserList/>} />
             <Route path={"/dashboard"} element={<Dashboard/>} />
             <Route path={"/dashboard/user/:id/edit"} element={<UserEdit/>} />
-            <Route path={"/dashboard/productlist"} element={<ProductList/>} />
+            <Route path={"/dashboard/productlist"} element={<ProductList/>} exact />
+            <Route path={"/dashboard/productlist/:pageNumber"} element={<ProductList/>} exact />
+            <Route path={"/dashboard/product/:id/edit"} element={<ProductEdit/>} />
+            <Route path={"/dashboard/orderlist"} element={<OrderList/>} />
+            <Route path="/page/:pageNumber" element={<Home/>} />
+            <Route path="/search/:keyword/page/:pageNumber" element={<Home/>} />
+            
           </Routes>
       </main>
     </Router>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {  useEffect } from "react";
 import {
   Link,
   useParams,
@@ -21,11 +21,11 @@ import {
   Form,
   Container,
 } from "react-bootstrap";
-const Cart = ({}) => {
+const Cart = () => {
   const { id } = useParams();
-  let [searchParams, setSearchParams] = useSearchParams();
+  let [searchParams] = useSearchParams();
 
-  const qty = searchParams.get("qty") || [1];
+  
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
@@ -38,10 +38,11 @@ const Cart = ({}) => {
   console.log(cartItems);
   const navigate = useNavigate();
   useEffect(() => {
+    const qty = searchParams.get("qty") || [1];
     if (id) {
       dispatch(addToCart(id, qty));
     }
-  }, [dispatch, id, qty]);
+  }, [dispatch, id, searchParams]);
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id));

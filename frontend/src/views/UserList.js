@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import React, {  useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { listUsers, deleteUser } from "../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { Table, Button, Container } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
 import SideBar from "../components/SideBar.js";
 import DashNav from "../components/DashNav.js";
 const UserList = () => {
@@ -27,7 +27,7 @@ const UserList = () => {
     }else{
       navigate('/login')
     }
-  }, [dispatch, successDelete,userInfo]);
+  }, [dispatch, successDelete,userInfo, navigate]);
 
   const deleteUserHandler = (id) => {
     if(window.confirm('Are you sure')){

@@ -1,7 +1,7 @@
 import SideBar from "../components/SideBar.js";
 import DashNav from "../components/DashNav.js";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 function Dashboard() {
   return (
