@@ -32,9 +32,10 @@ const Home = () => {
       <meta name='keywords' content='electronics, buy electronics, cheep electronics' />
     </Helmet>
       <Header />
+      {!keyword && <ProductCarousel />}
+
       <Container>
         <div className='mt-3'>
-        {!keyword && <ProductCarousel />}
         </div>
         <h1>Latest Products</h1>
         {loading ? (
