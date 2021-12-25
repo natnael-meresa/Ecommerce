@@ -27,13 +27,14 @@ const Header = () => {
             <Nav  className="me-auto">
             <SearchBox />
 
+              
+              </Nav>
+              <Nav>
               <Nav.Link>
                 <Link to="/cart" className="link">
                   <li className="fas fa-shopping-cart"></li> CART
                 </Link>
               </Nav.Link>
-              </Nav>
-              <Nav>
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id="username">
                   <NavDropdown.Item>
