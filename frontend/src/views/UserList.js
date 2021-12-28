@@ -1,10 +1,10 @@
-import React, {  useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { listUsers, deleteUser } from "../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, Navbar, Container  } from "react-bootstrap";
 import SideBar from "../components/SideBar.js";
 import DashNav from "../components/DashNav.js";
 const UserList = () => {
@@ -12,6 +12,19 @@ const UserList = () => {
 
   const navigate = useNavigate()
 
+  const [toggler, setToggler] = useState(true);
+
+  const [windowDimention, detectHW] = useState({
+    winWidth: window.innerWidth,
+    winHeight: window.innerHeight,
+  });
+
+  const detectSize = () => {
+    detectHW({
+      winWidth: window.innerWidth,
+      winHeight: window.innerHeight,
+    });
+  };
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
 
@@ -27,7 +40,16 @@ const UserList = () => {
     }else{
       navigate('/login')
     }
-  }, [dispatch, successDelete,userInfo, navigate]);
+
+    window.addEventListener("resize", detectSize);
+
+    if (windowDimention.winWidth > 768) {
+      setToggler(true);
+    }
+    return () => {
+      window.removeEventListener("resize", detectSize);
+    };
+  }, [dispatch, successDelete,userInfo, navigate,windowDimention]);
 
   const deleteUserHandler = (id) => {
     if(window.confirm('Are you sure')){
@@ -35,15 +57,30 @@ const UserList = () => {
     }
   };
 
+
+
   return (
     <>
-      <DashNav />
-      <SideBar />
-      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Dashboard</h1>
-      </div>
-        {loading ? (
+      <div id="wrapper">
+        {toggler && <SideBar></SideBar>}
+
+        <div id="content-wrapper">
+          <Navbar bg="light">
+            <button
+              id="sidebarToggleTop"
+              onClick={() => setToggler(!toggler)}
+              class="btn btn-link d-md-none rounded-circle mr-3"
+            >
+              <i class="fa fa-bars"></i>
+            </button>
+            <DashNav />
+          </Navbar>
+          <Container>
+            <div class="container-fluid">
+              <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">User List</h1>
+              </div>
+              {loading ? (
           <Loader />
         ) : error ? (
           <Message variant="danger">{error}</Message>
@@ -95,7 +132,10 @@ const UserList = () => {
             </tbody>
           </Table>
         )}
-      </main>
+            </div>
+          </Container>
+        </div>
+      </div>
     </>
   );
 };
