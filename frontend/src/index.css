@@ -12,7 +12,9 @@ code {
     monospace;
 }
 
-
+a{
+  text-decoration: none;
+}
 main{
   min-height: 80vh;
 }
@@ -57,7 +59,7 @@ h2 {
   top: 0;
 }
 
-.carousel-caption h2 , p {
+.carousel-caption h2  {
 
   margin-top: 5rem;
   color: #000;
@@ -75,22 +77,119 @@ h2 {
 }
 
 /* searchbox */
-
 .searchbox{
-  margin-left: 5rem;
+  padding-left: 4rem;
+}
+#search-box{
+  margin-right: 0 !important;
+  padding-left: 6rem;
 }
 
 .input-box{
-  border-radius: 25px !important;
+  border-radius: 5px 0 0 5px !important;
 }
 
 .searchbox button{
-  border-radius: 24px;
+  border-radius: 0 5px 5px 0;
+  margin-left: 0 !important;
   padding-left: 14px !important;
   padding-right: 14px !important;
 }
 
+#basic-navbar-nav{
+  color:black;
+}
 
 
 
+#wrapper {
+  display: flex !important;
+}
 
+#wrapper #content-wrapper {
+  background-color: #f8f9fc;
+  width: 100%;
+  overflow-x: hidden;
+  padding:0;
+  margin: 0;
+}
+
+#wrapper #content-wrapper #content {
+  flex: 1 0 auto;
+}
+
+.dash-sidebar {
+  width: 14rem !important;
+  min-height: 100vh;
+  background: #233240;
+  z-index: 1;
+}
+hr.sidebar-divider {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  margin-left: 0.5rem;
+  margin-right: 1rem;
+}
+
+.sidebar-brand{
+  text-decoration: none;
+  padding: 1.5rem 2.5rem;
+  color:wheat;
+  font-size: 1rem;
+  height: 3.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.nav-item .nav-link {
+  display: block;
+  color: #fff !important;
+  width: 100%;
+  text-align: left;
+  padding: 0 !important;
+}
+
+.dash-navbar-nav{
+  padding-right: 5rem;
+}
+.nav-item .nav-link i {
+  font-size: 0.85rem;
+  margin-right: 0.25rem;
+}
+.meyou{
+  padding: 0;
+  margin: 0;
+}
+.topbar {
+  height: 2.4rem;
+}
+.img-profile{
+  width:2.5rem;
+  height: 1.5rem;;
+}
+
+.dropdown-toggle::after{
+  border: none !important;
+}
+
+.chart-area {
+  position: relative;
+  height: 10rem;
+  width: 100%;
+}
+
+.border-left-success {
+  border-left: 0.25rem solid #233240!important;
+}
+
+.border-left-primary{
+  border-left: 00.25rem solid #1cc88a!important;
+}
+
+.border-left-info{
+  border-left: 0.25rem solid #36b9cc!important
+}
+
+.border-left-warning {
+  border-left: 0.25rem solid #f6c23e!important;
+}
