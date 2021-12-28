@@ -14,10 +14,11 @@ const SearchBox = () => {
     }
     return (
         <Form onSubmit={searchHandler} className="d-flex searchbox" inline >
-            <FormControl type='search' name='q' onChange={(e) => setKeyword(e.target.value)} placeholder='Search Products...' className='input-box me-2 mr-sm ml-sm-5' aria-label="Search">
+            <FormControl id="search-box" type='search' name='q' onChange={(e) => setKeyword(e.target.value)} placeholder='Search Products...' className='input-box me-2 mr-sm ml-sm-5' aria-label="Search">
             </FormControl>
-            <Button type='submit' variant='outline-success' className='p-2'>Search</Button>
-
+            <Button type="submit" className="btn btn-primary" variant="outline-success">
+                <i class="fas fa-search fa-sm"></i>
+            </Button>
         </Form>
     )
 }

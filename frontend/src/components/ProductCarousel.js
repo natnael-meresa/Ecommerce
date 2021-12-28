@@ -18,28 +18,24 @@ const ProductCarousel = () => {
     return loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
         <Carousel pause='true' className='bg-dark carsoual carousel-content'>
                 <Carousel.Item key={product._id}>
-                    <Link to={`/product/${product._id}`} >
                         <Image src="./images/slid3.jpg" alt={product.name} />
                         <Carousel.Caption className='carousel-caption'>
                             <h2>we provide the best products with cheepest prices</h2> 
                         </Carousel.Caption>
-                    </Link>
                 </Carousel.Item>
                 <Carousel.Item key={product._id}>
-                    <Link to={`/product/${product._id}`} >
+
                         <Image src="./images/slid4.jpg" alt={product.name} />
                         <Carousel.Caption className='carousel-caption'>
                         <h2>we provide the best products with cheepest prices</h2> 
                         </Carousel.Caption>
-                    </Link>
                 </Carousel.Item>
                 <Carousel.Item key={product._id}>
-                    <Link to={`/product/${product._id}`} >
+
                         <Image src="./images/slid5.jpg" alt={product.name} />
                         <Carousel.Caption className='carousel-caption'>
                         <h2>we provide the best products with fastest delivery</h2>  
                         </Carousel.Caption>
-                    </Link>
                 </Carousel.Item>
         </Carousel>
     )
