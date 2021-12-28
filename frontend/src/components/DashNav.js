@@ -1,40 +1,71 @@
-import React from "react";
+import { Navbar, Nav, Container,Dropdown  } from "react-bootstrap";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-    Navbar,
-    Nav,
-    NavDropdown,
-
-  } from "react-bootstrap";
+import { logout } from "../actions/userActions.js";
+import { useDispatch,useSelector } from "react-redux";
+import SearchBox from "./SearchBox.js";
 const DashNav = () => {
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const dispatch = useDispatch();
+  const logoutHandler = () => {
+    dispatch(logout());
+  };
   return (
     <>
-      <Navbar bg="light" expand="lg" className=" p-0 shadow">
-        <Navbar.Brand className="navbar-brands col-lg-2">
-          <Link to="/" className="link">
-            Ecommerce
-          </Link>
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
-            navbarScroll
-          >
-            <NavDropdown title="Link" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">
-                Something else here
-              </NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
+      
+            <Container>
+              <Navbar.Collapse id="basic-navbar-nav" className='topbar'>
+                <Nav className="me-auto meyou">
+                <SearchBox />
+
+                </Nav>
+                <Nav className="navbar-nav dash-navbar-nav ml-auto">
+              
+                  <Dropdown  class="nav-item dropdown no-arrow">
+                    <Dropdown.Toggle
+                      class="nav-link dropdown-toggle"
+                      id="userDropdown"
+                      as={'a'}
+                      role="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <span class="mr-2 d-none d-lg-inline text-gray-600">
+                      {userInfo.name}
+                      </span>
+                      <img
+                        class="img-profile rounded-circle"
+                        src="/images/undraw_profile.svg"
+                      />
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu
+                      class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                      aria-labelledby="userDropdown"
+                    >
+                      <Link class="dropdown-item" to="/profile">
+                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Profile
+                      </Link>
+                      <div class="dropdown-divider"></div>
+                      <a
+                        class="dropdown-item"
+                        href="#"
+                        data-toggle="modal"
+                        data-target="#logoutModal"
+                        onClick={logoutHandler}
+                      >
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Logout
+                      </a>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Nav>
+              </Navbar.Collapse>
+            </Container>
+
     </>
   );
 };
