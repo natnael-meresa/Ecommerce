@@ -1,9 +1,9 @@
-import React, {  useEffect } from "react";
+import React, {  useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { Table, Button, Row, Col } from "react-bootstrap";
+import { Table, Button, Navbar, Container } from "react-bootstrap";
 import SideBar from "../components/SideBar.js";
 import DashNav from "../components/DashNav.js";
 import { listProducts, deleteProduct, createProduct } from "../actions/productActions";
@@ -35,6 +35,22 @@ const ProductList = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  
+  const [toggler, setToggler] = useState(true);
+
+  const [windowDimention, detectHW] = useState({
+    winWidth: window.innerWidth,
+    winHeight: window.innerHeight,
+  });
+
+  const detectSize = () => {
+    detectHW({
+      winWidth: window.innerWidth,
+      winHeight: window.innerHeight,
+    });
+  };
+
+
   useEffect(() => {
       dispatch({type: PRODUCT_CREATE_RESET})
     if (!userInfo.isAdmin) {
@@ -46,7 +62,16 @@ const ProductList = () => {
     }else{
         dispatch(listProducts('', pageNumber));
     }
-  }, [dispatch, userInfo, successDelete, createdProduct,successCreate, pageNumber, navigate]);
+
+    window.addEventListener("resize", detectSize);
+
+    if (windowDimention.winWidth > 768) {
+      setToggler(true);
+    }
+    return () => {
+      window.removeEventListener("resize", detectSize);
+    };
+  }, [dispatch, userInfo, successDelete, createdProduct,successCreate, pageNumber, navigate, windowDimention]);
 
   const deleteProductHandler = (id) => {
     if (window.confirm("Are you sure")) {
@@ -57,25 +82,32 @@ const ProductList = () => {
   const createProductHandler = () => {
     dispatch(createProduct())
   };
+    return (
+      <>
+        <div id="wrapper">
+          {toggler && <SideBar></SideBar>}
+  
+          <div id="content-wrapper">
+            <Navbar bg="light">
+              <button
+                id="sidebarToggleTop"
+                onClick={() => setToggler(!toggler)}
+                class="btn btn-link d-md-none rounded-circle mr-3"
+              >
+                <i class="fa fa-bars"></i>
+              </button>
+              <DashNav />
+            </Navbar>
+            <Container>
+              <div class="container-fluid">
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                  <h1 class="h3 mb-0 text-gray-800">Product List</h1>
 
-  return (
-    <>
-      <DashNav />
-      <SideBar />
-      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <Row className="align-items-center">
-          <Col>
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-              <h1 class="h2">Product List</h1>
-            </div>
-          </Col>
-          <Col className="text-right">
-            <Button className="my-3" onClick={createProductHandler}>
+                  <Button className="my-3" onClick={createProductHandler}>
               <i className="fas fa-plus"></i> Create Product
             </Button>
-          </Col>
-        </Row>
-        {loadingDelete && <Loader />}
+                </div>
+                {loadingDelete && <Loader />}
         {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
         {loadingCreate && <Loader />}
         {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
@@ -125,9 +157,13 @@ const ProductList = () => {
           <Paginate pages={pages} page={page} isAdmin={true} />
           </>
         )}
-      </main>
-    </>
+              </div>
+            </Container>
+          </div>
+        </div>
+      </>
   );
 };
 
 export default ProductList;
+
