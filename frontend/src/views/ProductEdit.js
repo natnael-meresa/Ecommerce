@@ -13,6 +13,8 @@ import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
 import {
   Button,
   Form,
+  Navbar,
+  Container
 } from "react-bootstrap";
 
 const ProductEdit = () => {
@@ -28,6 +30,10 @@ const ProductEdit = () => {
 
 
   const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
@@ -35,6 +41,20 @@ const ProductEdit = () => {
   const { loading: loadingUpdate, error: errorUpdate, success: successUpdate } = productUpdate;
 
   const navigate = useNavigate();
+
+  const [toggler, setToggler] = useState(true);
+
+  const [windowDimention, detectHW] = useState({
+    winWidth: window.innerWidth,
+    winHeight: window.innerHeight,
+  });
+
+  const detectSize = () => {
+    detectHW({
+      winWidth: window.innerWidth,
+      winHeight: window.innerHeight,
+    });
+  };
 
   useEffect(() => {
       if(successUpdate){
@@ -53,6 +73,15 @@ const ProductEdit = () => {
             setDescription(product.description)
         }
     }
+
+    window.addEventListener("resize", detectSize);
+
+    if (windowDimention.winWidth > 768) {
+      setToggler(true);
+    }
+    return () => {
+      window.removeEventListener("resize", detectSize);
+    };
       
   }, [product, id, dispatch, successUpdate, navigate]);
 
@@ -80,13 +109,30 @@ const ProductEdit = () => {
           setUploading(false)
       }
   }
+
+
   return (
     <>
-      <DashNav />
-      <SideBar />
-      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <FormContainer>
-          <h1>Edit Product</h1>
+      <div id="wrapper">
+        {toggler && <SideBar></SideBar>}
+
+        <div id="content-wrapper">
+          <Navbar bg="light">
+            <button
+              id="sidebarToggleTop"
+              onClick={() => setToggler(!toggler)}
+              class="btn btn-link d-md-none rounded-circle mr-3"
+            >
+              <i class="fa fa-bars"></i>
+            </button>
+            <DashNav />
+          </Navbar>
+          <Container>
+            <div class="container-fluid">
+              <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">Edit  Product</h1>
+              </div>
+              <FormContainer>
           {loadingUpdate && <Loader />}
           {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
           {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message>: (
@@ -142,6 +188,15 @@ const ProductEdit = () => {
                   onChange={(e) => setCategory(e.target.value)}
                 ></Form.Control>
               </Form.Group>
+              <Form.Group controlId="description">
+                <Form.Label>Description</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
               <Form.Group controlId="countInStock">
                 <Form.Label>Count In Stock</Form.Label>
                 <Form.Control
@@ -158,9 +213,12 @@ const ProductEdit = () => {
   
           ) }
         </FormContainer>
-      </main>
+            </div>
+          </Container>
+        </div>
+      </div>
     </>
-  );
+);
 };
 
 export default ProductEdit
