@@ -1,54 +1,46 @@
 import { Link } from "react-router-dom";
 import React from "react";
-
-import {
-    NavDropdown
-  } from "react-bootstrap";
+import { Navbar } from "react-bootstrap";
+import { NavDropdown, Nav } from "react-bootstrap";
 
 const SideBar = () => {
   return (
     <>
-      <div class="container-fluid">
-        <div class="row">
-          <nav
-            id="sidebarMenu"
-            class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"
-          >
-            <div class="position-sticky pt-3">
-              <ul class="nav flex-column">
-              <li class="nav-item">
-                  <NavDropdown.Item>
-                    <Link to="/admin/userlist" className="link">
-                      Dashboard
-                    </Link>
-                  </NavDropdown.Item>
-                </li>
-                <li class="nav-item">
-                  <NavDropdown.Item>
-                    <Link to="/dashboard/userlist" className="link">
-                      User List
-                    </Link>
-                  </NavDropdown.Item>
-                </li>
-                <li class="nav-item">
-                  <NavDropdown.Item>
-                    <Link to="/dashboard/productlist" className="link">
-                      Product List
-                    </Link>
-                  </NavDropdown.Item>
-                </li>
-                <li class="nav-item">
-                  <NavDropdown.Item>
-                    <Link to="/dashboard/orderlist" className="link">
-                      Order List
-                    </Link>
-                  </NavDropdown.Item>
-                </li>
-              </ul>
-            </div>
-          </nav>
-        </div>
-      </div>
+      <Nav className="dash-sidebar flex-column">
+        <Link to="/" className="link sidebar-brand">
+          <Navbar.Brand>Ecommerce</Navbar.Brand>
+        </Link>
+
+        <hr class="sidebar-divider" />
+        <Nav.Link className="nav-item">
+          <Link class="link nav-link" to="/dashboard/">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+          </Link>
+        </Nav.Link>
+        <hr class="sidebar-divider" />
+        <Nav.Link className="nav-item">
+          <Link to="/dashboard/userlist" className="link nav-link">
+          <i class="fas fa-users"></i>
+            <span>User List</span>
+          </Link>
+        </Nav.Link>
+        <hr class="sidebar-divider" />
+        <Nav.Link className="nav-item">
+          <Link to="/dashboard/productlist" className="link nav-link">
+          <i class="fas fa-list-ol"></i>
+            <span>Product List</span>
+          </Link>
+        </Nav.Link>
+        <hr class="sidebar-divider" />
+        <Nav.Link className="nav-item">
+          <Link to="/dashboard/orderlist" className="link nav-link">
+          <i class="fas fa-luggage-cart"></i>
+            <span>Order List</span>
+          </Link>
+        </Nav.Link>
+        <hr class="sidebar-divider" />
+      </Nav>
     </>
   );
 };
